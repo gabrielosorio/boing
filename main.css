@@ -1,0 +1,30 @@
+table {
+  width: 300px;
+  height: 300px;
+  border: 2px solid lightgray;
+}
+
+table tr {
+  height: 50px;
+}
+
+table td {
+  width: 100px;
+  border: 2px solid lightgray;
+}
+
+table td.path {
+  background-color: aliceblue;
+}
+
+table td.blip {
+  background-color: antiquewhite;
+}
+
+#game-container { width: 300px; }
+#top-left-control,
+#bottom-left-control { float: left; }
+#top-right-control,
+#bottom-right-control { float: right; }
+
+#notification-wrapper { float: left; width: 100%; margin-top: 20px; font-size: 40px; }
