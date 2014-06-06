@@ -1,15 +1,10 @@
 table {
-  width: 300px;
-  height: 300px;
+  width: 360px;
+  height: 260px;
   border: 2px solid lightgray;
 }
 
-table tr {
-  height: 50px;
-}
-
 table td {
-  width: 100px;
   border: 2px solid lightgray;
 }
 
@@ -21,7 +16,11 @@ table td.blip {
   background-color: antiquewhite;
 }
 
-#game-container { width: 300px; }
+table td.boinger.blip {
+  background-color: lightcoral;
+}
+
+#game-container { width: 360px; }
 #top-left-control,
 #bottom-left-control { float: left; }
 #top-right-control,

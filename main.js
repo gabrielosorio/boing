@@ -9,7 +9,8 @@ var running = true,
     pointsRemovedPerPrematureBoing = 32,
     $lastBlip = $(),
     $newBlip = $(),
-    tableSize = 5, // Tablesize should be set dynamically from this var
+    tableWidth = 0,
+    tableHeight = 0,
     userRequestedBoing = false;
 
 $(function() {
@@ -30,6 +31,8 @@ $(function() {
 });
 
 function start() {
+  tableWidth = $('table tr:first-child td').length;
+  tableHeight = $('table tr').length;
   running = true;
   updateTimerDisplay();
   draw();
@@ -56,6 +59,9 @@ function tick() {
   } else {
     timeElapsed = 0;
     drawSpeed -= drawSpeedReductionPerRound;
+    if (drawSpeed < 0) {
+      gameOver('Damn, nigga - you amazing!')
+    }
   }
 }
 
@@ -69,7 +75,7 @@ function moveBlip() {
   $blip.toggleClass('blip');
   $newBlip.toggleClass('blip');
   if ($newBlip.length === 0) {
-    gameOver();
+    gameOver('Game Over, Dude.');
     return;
   }
   $lastBlip = $blip;
@@ -117,11 +123,13 @@ function getPossiblePathsFor($blip) {
     blipIndexLeft = 0;
   }
 
-  if (blipIndexRight > tableSize) {
-    blipIndexRight = tableSize;
+  if (blipIndexRight > tableWidth) {
+    blipIndexRight = tableWidth;
   }
 
   // Get only the surrounding paths
+  $.merge($possiblePaths, $blip.next().filter('.path'));
+  $.merge($possiblePaths, $blip.prev().filter('.path'));
   if (direction === 'free') {
     $adjacentRows.each(function(i, row) {
       $.merge($possiblePaths, $(row).find('td').slice(blipIndexLeft, blipIndexRight).filter('.path').not($lastBlip));
@@ -193,7 +201,7 @@ function inTopLeftRegion($blip) {
 function inTopRightRegion($blip) {
   var cellIndex = $blip.index(),
       rowIndex = $blip.parent('tr').index();
-  return cellIndex === (tableSize - 1) &&
+  return cellIndex === (tableWidth - 1) &&
       rowIndex === 0;
 }
 
@@ -201,14 +209,14 @@ function inBottomLeftRegion($blip) {
   var cellIndex = $blip.index(),
       rowIndex = $blip.parent('tr').index();
   return cellIndex === 0 &&
-      rowIndex === (tableSize - 1);
+      rowIndex === (tableHeight - 1);
 }
 
 function inBottomRightRegion($blip) {
   var cellIndex = $blip.index(),
       rowIndex = $blip.parent('tr').index();
-  return cellIndex === (tableSize - 1) &&
-      rowIndex === (tableSize - 1);
+  return cellIndex === (tableWidth - 1) &&
+      rowIndex === (tableHeight - 1);
 }
 
 function rewardWithPointsPerCycle() {
@@ -220,9 +228,9 @@ function updateGamePointsDisplay() {
   $('#game-points-amount').html(gamePoints);
 }
 
-function gameOver() {
+function gameOver(message) {
   stop();
-  $('#notification-wrapper').html('Game Over, Dude.');
+  $('#notification-wrapper').html(message);
 }
 
 function penalizePrematureBoinger() {
