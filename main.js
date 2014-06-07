@@ -131,8 +131,8 @@ function getPossiblePathsFor($blip) {
   }
 
   // Get only the surrounding paths
-  $.merge($possiblePaths, $blip.next().filter('.path'));
-  $.merge($possiblePaths, $blip.prev().filter('.path'));
+  $.merge($possiblePaths, $blip.next().filter('.path').not($lastBlip));
+  $.merge($possiblePaths, $blip.prev().filter('.path').not($lastBlip));
   if (direction === 'free') {
     $adjacentRows.each(function(i, row) {
       $.merge($possiblePaths, $(row).find('td').slice(blipIndexLeft, blipIndexRight).filter('.path').not($lastBlip));
