@@ -27,3 +27,5 @@ table td.boinger.blip {
 #bottom-right-control { float: right; }
 
 #notification-wrapper { float: left; width: 100%; margin-top: 20px; font-size: 40px; }
+
+button { height: 42px; margin: 5px 0; }
