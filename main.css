@@ -1,5 +1,5 @@
 table {
-  width: 360px;
+  width: 100%;
   height: 260px;
   border: 2px solid lightgray;
 }
@@ -20,7 +20,7 @@ table td.boinger.blip {
   background-color: lightcoral;
 }
 
-#game-container { width: 360px; }
+#game-container { width: 100%; max-width: 600px; }
 #top-left-control,
 #bottom-left-control { float: left; }
 #top-right-control,
@@ -28,4 +28,4 @@ table td.boinger.blip {
 
 #notification-wrapper { float: left; width: 100%; margin-top: 20px; font-size: 40px; }
 
-button { height: 42px; margin: 5px 0; }
+button { height: 42px; margin: 5px 0; -webkit-appearance: none; }
