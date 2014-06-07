@@ -16,16 +16,16 @@ var running = true,
 $(function() {
   start();
 
-  $('#top-left-control').click(function() {
+  new NoClickDelay($('#top-left-control').get(0), function() {
     boingControlTopLeft();
   });
-  $('#top-right-control').click(function() {
+  new NoClickDelay($('#top-right-control').get(0), function() {
     boingControlTopRight();
   });
-  $('#bottom-left-control').click(function() {
+  new NoClickDelay($('#bottom-left-control').get(0), function() {
     boingControlBottomLeft();
   });
-  $('#bottom-right-control').click(function() {
+  new NoClickDelay($('#bottom-right-control').get(0), function() {
     boingControlBottomRight();
   });
 });
