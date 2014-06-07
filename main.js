@@ -36,6 +36,7 @@ function start() {
   running = true;
   updateTimerDisplay();
   draw();
+  tick();
 }
 
 function stop() {
@@ -43,26 +44,28 @@ function stop() {
 }
 
 function draw() {
-  if (running) {
-    setTimeout(function() {
-        moveBlip();
-        tick();
-        draw();
-    }, drawSpeed);
-  }
+  if (!running) return;
+  setTimeout(function() {
+      moveBlip();
+      draw();
+  }, drawSpeed);
 }
 
 function tick() {
-  if (timeElapsed < roundDuration) {
-    timeElapsed += 1000;
-    updateTimerDisplay();
-  } else {
-    timeElapsed = 0;
-    drawSpeed -= drawSpeedReductionPerRound;
-    if (drawSpeed < 0) {
-      gameOver('Damn, nigga - you amazing!')
+  if (!running) return;
+  setTimeout(function() {
+    if (timeElapsed < roundDuration) {
+      timeElapsed += 1000;
+      updateTimerDisplay();
+    } else {
+      timeElapsed = 0;
+      drawSpeed -= drawSpeedReductionPerRound;
+      if (drawSpeed < 0) {
+        gameOver('Damn, nigga - you amazing!')
+      }
     }
-  }
+    tick();
+  }, 1000);
 }
 
 function moveBlip() {
